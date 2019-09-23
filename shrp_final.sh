@@ -27,7 +27,6 @@ RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 
 ZIP_NAME=SHRP-$SHRP_DEVICE_CODE-$VERSION-$DATE
 
-echo -e "${CLR_BLD_RED}**** Making Zip ****${CLR_RST}"
 if [ -d "$SHRP_WORK_DIR" ]; then
         rm -rf "$SHRP_WORK_DIR"
         rm -rf "$SHRP_OUT"/*.zip
@@ -49,5 +48,4 @@ cp "$RECOVERY_IMG" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
 echo -e ""
 cd $SHRP_WORK_DIR
 zip -r ${ZIP_NAME}.zip *
-echo -e "${CLR_BLD_PPL} **** DONE MAKING SHRP ZIP *** ${CLR_RST}"
 
