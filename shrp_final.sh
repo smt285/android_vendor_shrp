@@ -22,23 +22,24 @@ SHRP_VENDOR=vendor/shrp
 SHRP_BUILD=build/make/shrp
 SHRP_OUT=$OUT
 SHRP_WORK_DIR=$OUT/zip
+SHRP_META_DATA_DIR=$OUT/zip/META-INF
 RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 
 ZIP_NAME=SHRP-$SHRP_DEVICE_CODE-$VERSION-$DATE
 
-if [ -d "$SHRP_WORK_DIR" ]; then
-        rm -rf "$SHRP_WORK_DIR"
+if [ -d "$SHRP_META_DATA_DIR" ]; then
+        rm -rf "$SHRP_META_DATA_DIR"
         rm -rf "$SHRP_OUT"/*.zip
 fi
 
-if [ ! -d "SHRP_WORK_DIR" ]; then
-        mkdir "$SHRP_WORK_DIR"
-fi
+#if [ ! -d "SHRP_WORK_DIR" ]; then
+#       mkdir "$SHRP_WORK_DIR"
+#fi
 
-mkdir -p "$SHRP_WORK_DIR/Files/SHRP/epicx"
+#mkdir -p "$SHRP_WORK_DIR/Files/SHRP/epicx"
 cp -R "$SHRP_VENDOR/extras/"* "$SHRP_WORK_DIR/Files/SHRP/epicx/"
-cp -R "$SHRP_OUT/recovery/root/etc/cookies" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
+#cp -R "$SHRP_OUT/recovery/root/etc/cookies" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
 mkdir -p "$SHRP_WORK_DIR/META-INF/com/google/android"
 cp -R "$SHRP_VENDOR/updater/"* "$SHRP_WORK_DIR/META-INF/com/google/android/"
 cp -R "$SHRP_BUILD/updater-script" "$SHRP_WORK_DIR/META-INF/com/google/android/"
