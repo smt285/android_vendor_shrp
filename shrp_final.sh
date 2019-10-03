@@ -38,7 +38,7 @@ fi
 #fi
 
 #mkdir -p "$SHRP_WORK_DIR/Files/SHRP/epicx"
-cp -R "$SHRP_VENDOR/extras/"* "$SHRP_WORK_DIR/Files/SHRP/epicx/"
+cp -a $SHRP_VENDOR/extras/. $SHRP_WORK_DIR/Files/SHRP/epicx
 #cp -R "$SHRP_OUT/recovery/root/etc/cookies" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
 mkdir -p "$SHRP_WORK_DIR/META-INF/com/google/android"
 cp -R "$SHRP_VENDOR/updater/"* "$SHRP_WORK_DIR/META-INF/com/google/android/"
