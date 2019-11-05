@@ -32,7 +32,8 @@ CLR_BLD_CYA=$CLR_RST$CLR_BLD$(tput setaf 6) #  cyan, bold
 # Extra Variables
 BUILD_START=$(date +"%s")
 DATE=$(date -u +%Y%m%d-%H%M)
-VERSION=2.1
+VERSION=2.2
+STATUS=beta
 SHRP_VENDOR=vendor/shrp
 SHRP_BUILD=build/make/shrp
 SHRP_OUT=$OUT
@@ -41,7 +42,7 @@ SHRP_META_DATA_DIR=$OUT/zip/META-INF
 RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 
-ZIP_NAME=SHRP-$SHRP_DEVICE_CODE-$VERSION-$DATE
+ZIP_NAME=SHRP-$VERSION-$STATUS-$DATE
 
 if [ -d "$SHRP_META_DATA_DIR" ]; then
         rm -rf "$SHRP_META_DATA_DIR"
