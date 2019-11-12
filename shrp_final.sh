@@ -29,17 +29,29 @@ CLR_BLD_BLU=$CLR_RST$CLR_BLD$(tput setaf 4) #  blue, bold
 CLR_BLD_PPL=$CLR_RST$CLR_BLD$(tput setaf 5) #  purple, bold
 CLR_BLD_CYA=$CLR_RST$CLR_BLD$(tput setaf 6) #  cyan, bold
 
+# Functions
+isab() {
+	if sed -n '1p' "$SHRP_BUILD/ab" | grep -Fqe "true"; then
+		return 0
+	else
+		return 1
+	fi
+}
+
 # Extra Variables
 BUILD_START=$(date +"%s")
 DATE=$(date -u +%Y%m%d-%H%M)
-VERSION=2.1
+VERSION=2.1.1
 SHRP_VENDOR=vendor/shrp
+MAGISKBOOT=$SHRP_VENDOR/extras/magiskboot
 SHRP_BUILD=build/make/shrp
 SHRP_OUT=$OUT
 SHRP_WORK_DIR=$OUT/zip
 SHRP_META_DATA_DIR=$OUT/zip/META-INF
 RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
+#SHRP_DEVICE_TMP=$(sed -n '2p' "$SHRP_BUILD/variables")
+#SHRP_DEVICE_CODE=$SHRP_DEVICE_TMP
 
 ZIP_NAME=SHRP-$SHRP_DEVICE_CODE-$VERSION-$DATE
 
@@ -57,11 +69,25 @@ cp -a $SHRP_VENDOR/extras/. $SHRP_WORK_DIR/Files/SHRP/epicx
 #cp -R "$SHRP_OUT/recovery/root/etc/cookies" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
 mkdir -p "$SHRP_WORK_DIR/META-INF/com/google/android"
 #cp -R "$SHRP_VENDOR/updater/"* "$SHRP_WORK_DIR/META-INF/com/google/android/"
-cp -R "$SHRP_BUILD/updater-script" "$SHRP_WORK_DIR/META-INF/com/google/android/"
-cp -R "$SHRP_VENDOR/updater/update-binary" "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
-
-cp "$RECOVERY_IMG" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
+if isab; then
+  rm -rf "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
+  mv "$SHRP_VENDOR/updater/update-binary" "$SHRP_VENDOR/updater/update-binary-old"
+  cp "$SHRP_VENDOR/updater/update-binary-a" "$SHRP_VENDOR/update-binary-a-bak"
+  mv "$SHRP_VENDOR/updater/update-binary-a" "$SHRP_VENDOR/updater/update-binary"
+  cat "$SHRP_BUILD/update-binary-b" >> "$SHRP_VENDOR/updater/update-binary"
+  cat "$SHRP_BUILD/update-binary-c" >> "$SHRP_VENDOR/updater/update-binary"
+  cat "$SHRP_BUILD/update-binary-d" >> "$SHRP_VENDOR/updater/update-binary"
+  cp -R "$SHRP_VENDOR/updater/update-binary" "$SHRP_WORK_DIR/META-INF/com/google/android/"
+  rm -rf "$SHRP_VENDOR/updater/update-binary"
+  mv "$SHRP_VENDOR/update-binary-a-bak" "$SHRP_VENDOR/updater/update-binary-a"
+  mv "$SHRP_VENDOR/updater/update-binary-old" "$SHRP_VENDOR/updater/update-binary"
+  cp "$RECOVERY_RAM" "$SHRP_WORK_DIR"
+  cp "$MAGISKBOOT"  "SHRP_WORK_DIR"
+else
+  cp -R "$SHRP_BUILD/updater-script" "$SHRP_WORK_DIR/META-INF/com/google/android/"
+  cp -R "$SHRP_VENDOR/updater/update-binary" "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
+  cp "$RECOVERY_IMG" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
+fi
 echo -e ""
 cd $SHRP_WORK_DIR
 zip -r ${ZIP_NAME}.zip *
-
