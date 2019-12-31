@@ -42,7 +42,7 @@ isab() {
 BUILD_START=$(date +"%s")
 DATE=$(date -u +%Y%m%d-%H%M)
 VERSION=2.2
-SHRP_DEVICE_CODE=$(sed -n '2p' "$SHRP_BUILD/variables")
+#SHRP_DEVICE_CODE=$(sed -n '2p' "$SHRP_BUILD/variables")
 SHRP_VENDOR=vendor/shrp
 MAGISKBOOT=$SHRP_VENDOR/extras/magiskboot
 SHRP_BUILD=build/make/shrp
@@ -51,8 +51,7 @@ SHRP_WORK_DIR=$OUT/zip
 SHRP_META_DATA_DIR=$OUT/zip/META-INF
 RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
-#SHRP_DEVICE_TMP=$(sed -n '2p' "$SHRP_BUILD/variables")
-#SHRP_DEVICE_CODE=$SHRP_DEVICE_TMP
+SHRP_DEVICE=$(cut -d'_' -f2-3 <<<$TARGET_PRODUCT)
 
 ZIP_NAME=SHRP-$VERSION-$SHRP_DEVICE_CODE-$DATE
 
@@ -66,7 +65,7 @@ fi
 #fi
 
 #mkdir -p "$SHRP_WORK_DIR/Files/SHRP/epicx"
-cp -a $SHRP_VENDOR/extras/. $SHRP_WORK_DIR/Files/SHRP/epicx
+cp -a $SHRP_VENDOR/extras/. $SHRP_WORK_DIR/Files/SHRP/addons
 #cp -R "$SHRP_OUT/recovery/root/etc/cookies" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
 mkdir -p "$SHRP_WORK_DIR/META-INF/com/google/android"
 #cp -R "$SHRP_VENDOR/updater/"* "$SHRP_WORK_DIR/META-INF/com/google/android/"
@@ -87,7 +86,7 @@ if isab; then
 else
   cp -R "$SHRP_BUILD/updater-script" "$SHRP_WORK_DIR/META-INF/com/google/android/"
   cp -R "$SHRP_VENDOR/updater/update-binary" "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
-  cp "$RECOVERY_IMG" "$SHRP_WORK_DIR/Files/SHRP/epicx/"
+  cp "$RECOVERY_IMG" "$SHRP_WORK_DIR/Files/SHRP/data/"
 fi
 echo -e ""
 cd $SHRP_WORK_DIR
