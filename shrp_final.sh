@@ -40,13 +40,10 @@ isab() {
 
 # Extra Variables
 BUILD_START=$(date +"%s")
-DATE=$(date -u +%Y%m%d-%H%M)
-VERSION=2.2
-STATUS=Beta
+DATE=$(date -u +%H:%M-%d.%m.%Y)
 SHRP_VENDOR=vendor/shrp
 MAGISKBOOT=$SHRP_VENDOR/extras/magiskboot
 SHRP_BUILD=build/make/shrp
-SHRP_DEVICE_CODE=$(sed -n '2p' "$SHRP_BUILD/variables")
 SHRP_OUT=$OUT
 SHRP_WORK_DIR=$OUT/zip
 SHRP_META_DATA_DIR=$OUT/zip/META-INF
@@ -54,7 +51,7 @@ RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 SHRP_DEVICE=$(cut -d'_' -f2-3 <<<$TARGET_PRODUCT)
 
-ZIP_NAME=$STATUS-SHRP_$VERSION-$SHRP_DEVICE_CODE_$DATE
+ZIP_NAME=SHRP_v2.2_$SHRP_DEVICE-$DATE
 
 if [ -d "$SHRP_META_DATA_DIR" ]; then
         rm -rf "$SHRP_META_DATA_DIR"
@@ -80,8 +77,9 @@ if isab; then
 else
   cp -R "$SHRP_BUILD/updater-script" "$SHRP_WORK_DIR/META-INF/com/google/android/"
   cp -R "$SHRP_VENDOR/updater/update-binary" "$SHRP_WORK_DIR/META-INF/com/google/android/update-binary"
-  cp "$RECOVERY_IMG" "$SHRP_WORK_DIR/Files/SHRP/data/"
+  cp "$RECOVERY_IMG" "$SHRP_WORK_DIR"
 fi
 echo -e ""
 cd $SHRP_WORK_DIR
 zip -r ${ZIP_NAME}.zip *
+mv $SHRP_WORK_DIR/*.zip $SHRP_OUT
