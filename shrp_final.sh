@@ -42,10 +42,11 @@ isab() {
 BUILD_START=$(date +"%s")
 DATE=$(date -u +%Y%m%d-%H%M)
 VERSION=2.2
-#SHRP_DEVICE_CODE=$(sed -n '2p' "$SHRP_BUILD/variables")
+STATUS=Beta
 SHRP_VENDOR=vendor/shrp
 MAGISKBOOT=$SHRP_VENDOR/extras/magiskboot
 SHRP_BUILD=build/make/shrp
+SHRP_DEVICE_CODE=$(sed -n '2p' "$SHRP_BUILD/variables")
 SHRP_OUT=$OUT
 SHRP_WORK_DIR=$OUT/zip
 SHRP_META_DATA_DIR=$OUT/zip/META-INF
@@ -53,16 +54,12 @@ RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 SHRP_DEVICE=$(cut -d'_' -f2-3 <<<$TARGET_PRODUCT)
 
-ZIP_NAME=SHRP-$VERSION-$SHRP_DEVICE_CODE-$DATE
+ZIP_NAME=$STATUS-SHRP_$VERSION-$SHRP_DEVICE_CODE_$DATE
 
 if [ -d "$SHRP_META_DATA_DIR" ]; then
         rm -rf "$SHRP_META_DATA_DIR"
         rm -rf "$SHRP_OUT"/*.zip
 fi
-
-#if [ ! -d "SHRP_WORK_DIR" ]; then
-#       mkdir "$SHRP_WORK_DIR"
-#fi
 
 cp -a $SHRP_VENDOR/extras/. $SHRP_WORK_DIR/Files/SHRP/addons
 mkdir -p "$SHRP_WORK_DIR/META-INF/com/google/android"
