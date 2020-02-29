@@ -51,6 +51,8 @@ RECOVERY_IMG=$OUT/recovery.img
 RECOVERY_RAM=$OUT/ramdisk-recovery.cpio
 SHRP_DEVICE=$(cut -d'_' -f2-3 <<<$TARGET_PRODUCT)
 
+export SHRP_DEVICE
+
 ZIP_NAME=SHRP_v2.2_$SHRP_DEVICE-$DATE
 
 if [ -d "$SHRP_META_DATA_DIR" ]; then
@@ -65,9 +67,7 @@ if isab; then
   mv "$SHRP_VENDOR/updater/update-binary" "$SHRP_VENDOR/updater/update-binary-old"
   cp "$SHRP_VENDOR/updater/update-binary-a" "$SHRP_VENDOR/update-binary-a-bak"
   mv "$SHRP_VENDOR/updater/update-binary-a" "$SHRP_VENDOR/updater/update-binary"
-  cat "$SHRP_BUILD/update-binary-b" >> "$SHRP_VENDOR/updater/update-binary"
-  cat "$SHRP_BUILD/update-binary-c" >> "$SHRP_VENDOR/updater/update-binary"
-  cat "$SHRP_BUILD/update-binary-d" >> "$SHRP_VENDOR/updater/update-binary"
+  sed -i 's/$device/'"$SHRP_DEVICE"'/g' "$SHRP_VENDOR/updater/update-binary"
   cp -R "$SHRP_VENDOR/updater/update-binary" "$SHRP_WORK_DIR/META-INF/com/google/android/"
   rm -rf "$SHRP_VENDOR/updater/update-binary"
   mv "$SHRP_VENDOR/update-binary-a-bak" "$SHRP_VENDOR/updater/update-binary-a"
