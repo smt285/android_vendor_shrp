@@ -34,7 +34,7 @@ mkdir -p $tmp;
 unzip -o "$ZIPFILE" -d $tmp || abort "[!!] Failed to extract zip! Check recovery logs.";
 
 ui_print "[i] Copying SHRP add-ons...";
-cp -r $tmp/Files/SHRP/addons /sdcard7
+cp -r $tmp/Files/SHRP/addons /sdcard
 
 cd $tmp;
 cp $tmp/Files/SHRP/addons/magiskboot $tmp;
