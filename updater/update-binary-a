@@ -17,7 +17,7 @@ ui_print "----------------------------------------";
 ui_print "-                                       ";
 ui_print "- SHRP installer for A/B devices        ";
 ui_print "- Device: $device                       ";
-ui_print "- Version: 2.2 official                 ";
+ui_print "- Version: 2.2 Stable                   ";
 ui_print "-                                       ";
 ui_print "----------------------------------------";
 ui_print " ";
@@ -34,7 +34,9 @@ mkdir -p $tmp;
 unzip -o "$ZIPFILE" -d $tmp || abort "[!!] Failed to extract zip! Check recovery logs.";
 
 ui_print "[i] Copying SHRP add-ons...";
-cp -r $tmp/Files/SHRP/addons /sdcard7
+rm -rf /sdcard/SHRP/
+mkdir -p /sdcard/SHRP/
+cp -r $tmp/Files/SHRP/addons /sdcard/SHRP
 
 cd $tmp;
 cp $tmp/Files/SHRP/addons/magiskboot $tmp;

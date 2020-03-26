@@ -40,7 +40,7 @@ isab() {
 
 # Extra Variables
 BUILD_START=$(date +"%s")
-DATE=$(date -u +%H:%M-%d.%m.%Y)
+DATE=$(date -u +%H%M%d%m%Y)
 SHRP_VENDOR=vendor/shrp
 MAGISKBOOT=$SHRP_VENDOR/extras/magiskboot
 SHRP_BUILD=build/make/shrp
