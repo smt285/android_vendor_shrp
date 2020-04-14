@@ -40,7 +40,6 @@ isab() {
 
 # Extra Variables
 BUILD_START=$(date +"%s")
-DATE=$(date -u +%H%M%d%m%Y)
 SHRP_VENDOR=vendor/shrp
 MAGISKBOOT=$SHRP_VENDOR/extras/magiskboot
 SHRP_BUILD=build/make/shrp
@@ -53,7 +52,7 @@ SHRP_DEVICE=$(cut -d'_' -f2-3 <<<$TARGET_PRODUCT)
 
 export SHRP_DEVICE
 
-ZIP_NAME=SHRP_v2.2_$SHRP_DEVICE-$DATE
+ZIP_NAME=SHRP_v2.2_$SHRP_DEVICE-$SHRP_BUILD_DATE
 
 if [ -d "$SHRP_META_DATA_DIR" ]; then
         rm -rf "$SHRP_META_DATA_DIR"
