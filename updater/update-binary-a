@@ -17,7 +17,7 @@ ui_print "----------------------------------------";
 ui_print "-                                       ";
 ui_print "- SHRP installer for A/B devices        ";
 ui_print "- Device: $device                       ";
-ui_print "- Version: 2.2 Stable                   ";
+ui_print "- Version: 2.3.1 Stable                 ";
 ui_print "-                                       ";
 ui_print "----------------------------------------";
 ui_print " ";
