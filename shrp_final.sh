@@ -68,7 +68,7 @@ DEFAULT_ADDON_LOC=$SHRP_VENDOR/extras
 addDefaultAddonPost $(normalizeVar $(get_build_var INC_IN_REC_ADDON_1)) $DEFAULT_ADDON_LOC/s_oms.zip $(normalizeVar $(get_build_var SHRP_SKIP_DEFAULT_ADDON_1)) $(normalizeVar $(get_build_var SHRP_EXCLUDE_DEFAULT_ADDONS))
 addDefaultAddonPost $(normalizeVar $(get_build_var INC_IN_REC_ADDON_2)) $DEFAULT_ADDON_LOC/s_non_oms.zip $(normalizeVar $(get_build_var SHRP_SKIP_DEFAULT_ADDON_2)) $(normalizeVar $(get_build_var SHRP_EXCLUDE_DEFAULT_ADDONS))
 addDefaultAddonPost $(normalizeVar $(get_build_var INC_IN_REC_ADDON_3)) $DEFAULT_ADDON_LOC/rfp.zip $(normalizeVar $(get_build_var SHRP_SKIP_DEFAULT_ADDON_3)) $(normalizeVar $(get_build_var SHRP_EXCLUDE_DEFAULT_ADDONS))
-addDefaultAddonPost $(normalizeVar $(get_build_var INC_IN_REC_ADDON_4)) $DEFAULT_ADDON_LOC/c_fixed_encryption.zip $(normalizeVar $(get_build_var SHRP_SKIP_DEFAULT_ADDON_4)) $(normalizeVar $(get_build_var SHRP_EXCLUDE_DEFAULT_ADDONS))
+addDefaultAddonPost $(normalizeVar $(get_build_var INC_IN_REC_ADDON_4)) $DEFAULT_ADDON_LOC/Disable_Dm-Verity_ForceEncrypt.zip $(normalizeVar $(get_build_var SHRP_SKIP_DEFAULT_ADDON_4)) $(normalizeVar $(get_build_var SHRP_EXCLUDE_DEFAULT_ADDONS))
 
 
 #handle External Addons
